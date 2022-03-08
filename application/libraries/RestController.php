@@ -221,6 +221,7 @@ class RestController extends \CI_Controller
     const HTTP_NOT_FOUND = 404;
     const HTTP_NOT_ACCEPTABLE = 406;
     const HTTP_INTERNAL_ERROR = 500;
+    const HTTP_METHOD_NOT_ALLOWED = 405;
 
     /**
      * @var Format
@@ -540,7 +541,7 @@ class RestController extends \CI_Controller
             $this->response([
                 $this->config->item('rest_status_field_name')  => false,
                 $this->config->item('rest_message_field_name') => $this->lang->line('text_rest_unknown_method'),
-            ], $this->http_status['METHOD_NOT_ALLOWED']);
+            ], self::HTTP_METHOD_NOT_ALLOWED);
         }
 
         // Doing key related stuff? Can only do it if they have a key right?
