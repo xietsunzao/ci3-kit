@@ -14,11 +14,10 @@ class Websites extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost/ci3-kit/api/users/getData')
+        fetch(`${process.env.REACT_APP_DOMAIN}/api/users/getData`)
             .then(response => {
                 return response.json();
             }).then(result => {
-                console.log(result);
                 this.setState({
                     websites: result
                 });
@@ -27,7 +26,7 @@ class Websites extends React.Component {
 
     deleteWebsite(id) {
         if (window.confirm("Are you sure want to delete?")) {
-            fetch('http://localhost/ci-3-1-9/index.php/websiterestcontroller/delete_website/' + id, {
+            fetch(`${process.env.REACT_APP_DOMAIN}/api/users/deleteUsers/${id}`, {
                 method: 'DELETE'//,
                 //mode: 'no-cors',
                 /*headers : {
@@ -37,8 +36,7 @@ class Websites extends React.Component {
             }).then(response => {
                 if (response.status === 200) {
                     alert("Website deleted successfully");
-
-                    fetch('http://localhost/ci-3-1-9/index.php/websiterestcontroller/websites')
+                    fetch(`${process.env.REACT_APP_DOMAIN}/api/users/getData`)
                         .then(response => {
                             return response.json();
                         }).then(result => {
@@ -81,7 +79,7 @@ class Websites extends React.Component {
                                         <td>
                                             <Link to={`/update/${item.id}`}>Edit</Link>
                                             &nbsp;
-                                            <a href="javascript:void(0);" onClick={this.deleteWebsite.bind(this, item.id)}>Delete</a>
+                                            <a href="#!" onClick={this.deleteWebsite.bind(this, item.id)}>Delete</a>
                                         </td>
                                     </tr>
                                 )

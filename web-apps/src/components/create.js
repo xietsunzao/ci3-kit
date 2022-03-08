@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Navigate } from 'react-router-dom';
 
 class Create extends React.Component {
+    state = {
+        redirect: false
+    }
     constructor(props) {
         super(props);
         this.state = { title: '', url: '' };
@@ -14,8 +17,10 @@ class Create extends React.Component {
         this.setState(state);
     }
     handleSubmit(event) {
+
         event.preventDefault();
-        fetch('http://localhost/ci-3-1-9/index.php/websiterestcontroller/add_website', {
+
+        fetch(`${process.env.REACT_APP_DOMAIN}/api/users/saveData`, {
             method: 'POST',
             body: JSON.stringify({
                 title: this.state.title,
@@ -25,31 +30,40 @@ class Create extends React.Component {
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then(response => {
+
             if (response.status === 200) {
                 alert("New website saved successfully");
+                this.setState({ redirect: true });
+
             }
         });
     }
     render() {
-        return (
-            <div id="container">
-                <Link to="/">Websites</Link>
-                <p />
-                <form onSubmit={this.handleSubmit}>
-                    <p>
-                        <label>Title:</label>
-                        <input type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Title" />
-                    </p>
-                    <p>
-                        <label>URL:</label>
-                        <input type="text" name="url" value={this.state.url} onChange={this.handleChange} placeholder="URL" />
-                    </p>
-                    <p>
-                        <input type="submit" value="Submit" />
-                    </p>
-                </form>
-            </div>
-        );
+        const { redirect } = this.state;
+        if (redirect) {
+            return <Navigate to='/' />;
+        } else {
+            return (
+    
+                <div id="container">
+                    <Link to="/">Websites</Link>
+                    <p />
+                    <form onSubmit={this.handleSubmit}>
+                        <p>
+                            <label>Title:</label>
+                            <input type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Title" />
+                        </p>
+                        <p>
+                            <label>URL:</label>
+                            <input type="text" name="url" value={this.state.url} onChange={this.handleChange} placeholder="URL" />
+                        </p>
+                        <p>
+                            <input type="submit" value="Submit" />
+                        </p>
+                    </form>
+                </div>
+            );
+        }
     }
 }
 

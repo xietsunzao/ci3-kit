@@ -27,8 +27,6 @@ $baseURL = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : 
 $baseURL .= "://" . $_SERVER['HTTP_HOST'];
 $baseURL .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 $config['base_url'] = $baseURL;
-
-putenv("HTTP_HOST = {$baseURL}");
 /*
 |--------------------------------------------------------------------------
 | Index File
