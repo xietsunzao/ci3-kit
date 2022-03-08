@@ -18,7 +18,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Websites />} />
       <Route path="create" element={<Create />} />
-      <Route path="update" element={<Update />} />
+      <Route path="update/:id"  element={<Update />} />
     </Routes>
   </BrowserRouter>,
 

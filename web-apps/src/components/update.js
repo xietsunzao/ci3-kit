@@ -1,17 +1,19 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Update extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.state = { id: '', title: '', url: '' };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        console.log(this.props)
     }
 
     componentDidMount() {
-        fetch('http://localhost/ci-3-1-9/index.php/websiterestcontroller/website?id=' + this.props.match.params.id)
+        console.log(this.props);
+        fetch(`${process.env.REACT_APP_DOMAIN}/api/users/getRowData` + this.props.match.params.id)
             .then(response => {
                 return response.json();
             }).then(result => {
@@ -23,6 +25,7 @@ class Update extends React.Component {
                 });
             });
     }
+
     handleChange(event) {
         const state = this.state
         state[event.target.name] = event.target.value
