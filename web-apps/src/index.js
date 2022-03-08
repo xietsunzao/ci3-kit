@@ -9,7 +9,6 @@ import Websites from './components/websites';
 import Create from './components/create';
 import Update from './components/update';
 import registerServiceWorker from './registerServiceWorker';
-
 import './website.css';
 import './index.css';
 
