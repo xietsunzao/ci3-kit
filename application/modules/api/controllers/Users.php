@@ -44,7 +44,7 @@ class Users extends RestController
 
         header('Content-Type: application/json');
 
-        $key = sodium_hex2bin('e9897cea109576c2f8088c277125d553e4f83afbc0abbb92cfb1f7b776b4fee0');
+        $key = sodium_hex2bin('42e5c026b85f69f5afbb2a03a5bd10ff9ca99498b855e3471809091d8dc65f75');
 
         $encrypted = $_POST['message'] ?? null;
         if (!$encrypted) {

@@ -21,21 +21,22 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>assets/sodium/dist/sodium-plus.min.js"></script>
     <script>
+        var baseURL = '<?php echo base_url() ?>'
         /**
          * Get the example key. In the real world, you want to generate these randomly.
          */
         async function getExampleKey() {
             if (!window.sodium) window.sodium = await SodiumPlus.auto();
             return CryptographyKey.from(
-                'e9897cea109576c2f8088c277125d553e4f83afbc0abbb92cfb1f7b776b4fee0',
+                '42e5c026b85f69f5afbb2a03a5bd10ff9ca99498b855e3471809091d8dc65f75',
                 'hex'
             );
-            // return await sodium.crypto_secretbox_keygen();
+            return await sodium.crypto_secretbox_keygen();
         }
 
         /**
@@ -53,7 +54,7 @@
             let key = await getExampleKey();
             let message = $("#user-input").val();
             let encrypted = await encryptMessage(message, key);
-            $.post("/api/users/sendMessage", {
+            $.post(`${baseURL}api/users/sendMessage`, {
                 "message": encrypted
             }, function(response) {
                 console.log(response);
@@ -66,5 +67,3 @@
         $("#send-it").on('click', sendEncryptedMessage);
     </script>
 </body>
-
-</html>
