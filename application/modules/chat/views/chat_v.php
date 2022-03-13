@@ -27,9 +27,8 @@
     <script src="<?php echo base_url() ?>assets/sodium/dist/sodium-plus.min.js"></script>
     <script>
         var baseURL = '<?php echo base_url() ?>'
-        /**
-         * Get the example key. In the real world, you want to generate these randomly.
-         */
+
+
         async function getExampleKey() {
             if (!window.sodium) window.sodium = await SodiumPlus.auto();
             return CryptographyKey.from(
@@ -39,9 +38,6 @@
             return await sodium.crypto_secretbox_keygen();
         }
 
-        /**
-         * Encrypt a message under a given key.
-         */
         async function encryptMessage(message, key) {
             if (!window.sodium) window.sodium = await SodiumPlus.auto();
 
