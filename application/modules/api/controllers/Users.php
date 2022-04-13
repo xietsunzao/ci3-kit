@@ -25,7 +25,6 @@ class Users extends RestController
 
         $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
         $encryptedMessage = sodium_crypto_secretbox($message, $nonce, $secretKey);
-
         echo json_encode(
             ['message' => $message, 'original' => $encryptedMessage],
             JSON_PRETTY_PRINT
@@ -38,14 +37,10 @@ class Users extends RestController
         // $this->response($response);
     }
 
-
     public function sendMessage_post()
     {
-
         header('Content-Type: application/json');
-
         $key = sodium_hex2bin('42e5c026b85f69f5afbb2a03a5bd10ff9ca99498b855e3471809091d8dc65f75');
-
         $encrypted = $_POST['message'] ?? null;
         if (!$encrypted) {
             echo json_encode(
