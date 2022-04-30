@@ -20,21 +20,7 @@ class Users extends RestController
     public function getData_get()
     {
         $getWebsite = $this->Users_model->getDataUsers()->result();
-        $secretKey = sodium_crypto_secretbox_keygen();
-        $message = 'Sensitive information';
-
-        $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-        $encryptedMessage = sodium_crypto_secretbox($message, $nonce, $secretKey);
-        echo json_encode(
-            ['message' => $message, 'original' => $encryptedMessage],
-            JSON_PRETTY_PRINT
-        );
-
-        // $response = [
-        //     'status' => 200,
-        //     'msg' => $encryptedMessage
-        // ];
-        // $this->response($response);
+        $this->response($getWebsite, 200);
     }
 
     public function sendMessage_post()
@@ -75,6 +61,7 @@ class Users extends RestController
             $this->response(array('status' => 'success'));
         }
     }
+
 
     public function deleteUsers_delete($id = NULL)
     {
