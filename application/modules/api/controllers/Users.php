@@ -6,7 +6,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . 'libraries/RestController.php';
 require APPPATH . 'libraries/Format.php';
 
+
+
 use chriskacerguis\RestServer\RestController;
+
 
 class Users extends RestController
 {
@@ -74,4 +77,6 @@ class Users extends RestController
     }
 }
 
+
 /* End of file Users.php */
+
